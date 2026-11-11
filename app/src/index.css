@@ -1,14 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  @media (max-width: 1024px) {
+  @media (max-width: 1024px) {}
 
-  }
+  /*shadcn variables*/
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -40,14 +39,29 @@
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0)
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /*project variables*/
+  --font-primary: "Montserrat",
+  sans-serif;
+  --font-secondary: "Manrope",
+  sans-serif;
+  --font-weight-heading: 700;
+  --font-weight-text: 400;
+  --font-weight-accent: 600;
+  --brand-red: #C63031;
+  --grad-red: #5D1718;
+  --main-white: white;
+  --main-gray: #353535;
+  --main-gray-light: #767676;
+  --main-gray-lighter: #F6F6F6;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
 
   }
-}
+} */
 
 #root {
   width: 1126px;
@@ -140,8 +154,14 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;}
+    @apply border-border outline-ring/50;
+  }
+
   body {
-    @apply bg-background text-foreground;}
+    @apply bg-background text-foreground;
+  }
+
   html {
-    @apply font-sans;}}
+    @apply font-sans;
+  }
+}

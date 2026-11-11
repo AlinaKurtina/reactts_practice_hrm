@@ -18,7 +18,7 @@
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
     "firebase": "^13.2.0",
-    "lucide-react": "^1.71.0",
+    "lucide-react": "^1.72.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "shadcn": "^1.0.0",
@@ -28,6 +28,7 @@
     "@babel/core": "^7.29.7",
     "@rolldown/plugin-babel": "^0.3.0",
     "@tailwindcss/vite": "^4.3.5",
+    "@tanstack/router-plugin": "^1.169.0",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
@@ -38,10 +39,5 @@
     "tailwindcss": "^4.3.5",
     "typescript": "~7.0.2",
     "vite": "^8.3.6"
-  },
-  "imports": {
-    "#components/*": "./src/components/*.tsx",
-    "#lib/*": "./src/lib/*.ts",
-    "#hooks/*": "./src/hooks/*.ts"
   }
 }
