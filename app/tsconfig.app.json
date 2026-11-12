@@ -15,7 +15,7 @@
     "resolvePackageJsonImports": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     /* Bundler mode */
