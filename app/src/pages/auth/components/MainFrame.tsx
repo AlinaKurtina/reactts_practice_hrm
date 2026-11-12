@@ -2,13 +2,9 @@ import Gradient from "@/components/common/Gradient";
 import MainIcon from "./MainIcon";
 import dots1 from "../assets/vectors/dots1.svg";
 import dots2 from "../assets/vectors/dots2.svg";
+import { fetchImagesLocal } from "@/lib/utils";
 
-const imagesRecord = import.meta.glob<string>(
-  '../assets/icons/*',
-  { eager: true, import: 'default' }
-);
-
-const imageList = Object.values(imagesRecord);
+const imageList = fetchImagesLocal('mainIcons');
 
 function MainFrame() {
   return (
