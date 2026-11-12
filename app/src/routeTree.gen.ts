@@ -11,59 +11,73 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as AppCoursesRouteImport } from './routes/_app/courses'
 
-const StudentsLazyRouteImport = createFileRoute('/students')()
+const AppStudentsLazyRouteImport = createFileRoute('/_app/students')()
 
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CoursesRoute = CoursesRouteImport.update({
+const AppCoursesRoute = AppCoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
-const StudentsLazyRoute = StudentsLazyRouteImport.update({
+const AppStudentsLazyRoute = AppStudentsLazyRouteImport.update({
   id: '/students',
   path: '/students',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/students.lazy').then((d) => d.Route))
+  getParentRoute: () => AppRoute,
+} as any).lazy(() => import('./routes/_app/students.lazy').then((d) => d.Route))
 
 export interface FileRoutesByFullPath {
+  '/': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
-  '/courses': typeof CoursesRoute
-  '/students': typeof StudentsLazyRoute
+  '/courses': typeof AppCoursesRoute
+  '/students': typeof AppStudentsLazyRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
-  '/courses': typeof CoursesRoute
-  '/students': typeof StudentsLazyRoute
+  '/courses': typeof AppCoursesRoute
+  '/students': typeof AppStudentsLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
-  '/courses': typeof CoursesRoute
-  '/students': typeof StudentsLazyRoute
+  '/_app/courses': typeof AppCoursesRoute
+  '/_app/students': typeof AppStudentsLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/auth' | '/courses' | '/students'
+  fullPaths: '/' | '/auth' | '/courses' | '/students'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/courses' | '/students'
-  id: '__root__' | '/auth' | '/courses' | '/students'
+  to: '/' | '/auth' | '/courses' | '/students'
+  id: '__root__' | '/_app' | '/auth' | '/_app/courses' | '/_app/students'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
-  CoursesRoute: typeof CoursesRoute
-  StudentsLazyRoute: typeof StudentsLazyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -71,27 +85,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/courses': {
-      id: '/courses'
+    '/_app/courses': {
+      id: '/_app/courses'
       path: '/courses'
       fullPath: '/courses'
-      preLoaderRoute: typeof CoursesRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppCoursesRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/students': {
-      id: '/students'
+    '/_app/students': {
+      id: '/_app/students'
       path: '/students'
       fullPath: '/students'
-      preLoaderRoute: typeof StudentsLazyRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppStudentsLazyRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppCoursesRoute: typeof AppCoursesRoute
+  AppStudentsLazyRoute: typeof AppStudentsLazyRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppCoursesRoute: AppCoursesRoute,
+  AppStudentsLazyRoute: AppStudentsLazyRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
+  AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
-  CoursesRoute: CoursesRoute,
-  StudentsLazyRoute: StudentsLazyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

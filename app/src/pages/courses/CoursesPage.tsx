@@ -1,5 +1,11 @@
+import Content from "@/components/common/Content";
+
 function CoursesPage() {
-    return <></>
+    return (
+    <>
+    {/* <Content></Content> */}
+    </>
+    )
 }
 
 export default CoursesPage;
