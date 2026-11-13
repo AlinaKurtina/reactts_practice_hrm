@@ -149,6 +149,6 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-(--main-gray-lighter) text-foreground font-secondary;
   }
 }

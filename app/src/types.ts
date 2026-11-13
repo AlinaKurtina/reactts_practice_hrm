@@ -1,4 +1,4 @@
 export interface SrcLink {
-  src: string
+  src?: string
 };
 

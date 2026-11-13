@@ -1,14 +1,14 @@
 import type React from "react";
-import Container from "./Container";
+import Card from "./Card";
 import Paginations from "./Pagination/Pagination";
 
 function Content({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <Container className="ml-30 mt-10 min-h-165 min-w-330 bg-white w-5 relative">
+      <Card className="ml-28 mt-8 min-h-165 min-w-333 bg-white w-5 relative rounded-md">
         {children}
         <Paginations />
-      </Container>
+      </Card>
     </div>
   )
 }
