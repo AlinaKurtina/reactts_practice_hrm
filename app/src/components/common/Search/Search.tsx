@@ -1,5 +1,5 @@
 import { Input } from "../../ui/input";
-import searchIcon from './assets/search.svg';
+import searchIcon from '@/assets/search.svg';
 
 function Search({ placeholder }: { placeholder?: string }) {
   return (

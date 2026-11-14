@@ -1,10 +1,10 @@
 import Gradient from "@/components/common/Gradient";
 import MainIcon from "./MainIcon";
-import dots1 from "../assets/vectors/dots1.svg";
-import dots2 from "../assets/vectors/dots2.svg";
-import { fetchImagesLocal } from "@/lib/utils";
+import dots1 from "@/assets/vectors/dots1.svg";
+import dots2 from "@/assets/vectors/dots2.svg";
+import { BookOpen, Brain, ChartLine, UsersRound } from "lucide-react";
 
-const imageList = fetchImagesLocal('mainIcons');
+
 
 function MainFrame() {
   return (
@@ -13,11 +13,10 @@ function MainFrame() {
         <Gradient className="from-(--grad-red)" />
         <img src={dots1} alt="decor" className="z-2 w-50 ml-auto mt-3.5" />
         <ul className="flex items-center justify-center gap-5 z-2 mt-22 mb-8">
-          {imageList.map((src, i) => (
-            <li key={i}>
-              <MainIcon src={src} />
-            </li>
-          ))}
+          <li><MainIcon><Brain size={32} color="#ffffff" /></MainIcon></li>
+          <li><MainIcon><BookOpen size={32} color="#ffffff" /></MainIcon></li>
+          <li><MainIcon><ChartLine size={32} color="#ffffff" /></MainIcon></li>
+          <li><MainIcon><UsersRound size={32} color="#ffffff" /></MainIcon></li>
         </ul>
         <div className="flex flex-col items-center z-2 text-(--main-white) gap-5">
           <h4 className="font-head font-bold text-2xl">Innowise LMS</h4>

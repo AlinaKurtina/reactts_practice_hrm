@@ -1,9 +1,9 @@
-import type { SrcLink } from "@/types";
+import type { PropsWithChildren } from "react";
 
-function MainIcon({ src }: SrcLink) {
+function MainIcon({ children }: PropsWithChildren) {
   return (
-    <div className="p-5 border-3 border-white/70 rounded-full">
-      <img src={src} className="size-8" alt="icon" />
+    <div className="p-5 border-3 border-white rounded-full opacity-70">
+      {children}
     </div>
   )
 }

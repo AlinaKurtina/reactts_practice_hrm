@@ -1,26 +1,49 @@
 import { NavigationMenu } from "@/components/ui/navigation-menu";
 import Card from "../Card";
-
-const imageList = fetchImagesLocal('navIcons');
-
-import { fetchImagesLocal } from "@/lib/utils";
+import { CalendarDays, ClipboardList, List, Network, Settings, UserRound } from "lucide-react";
 import NavItem from "./NavItem";
+import type React from "react";
 
-const NAV = [
-  // {
-  //   title: 'Structure',
-  //   icon: Structure,
-  //   role: 'admin'
-  //   feature: 'structure'
-  // }
+interface NavLink {
+  title: string,
+  component: React.ReactElement
+}
+
+const NAV: NavLink[] = [
+  {
+    title: 'Profile',
+    component: <UserRound color="var(--main-gray)" />,
+  },
+  {
+    title: 'Network',
+    component: <Network color="var(--main-gray)" />,
+  },
+  {
+    title: 'List',
+    component: <List color="var(--main-gray)" />,
+  },
+  {
+    title: 'Notebook',
+    component: <ClipboardList color="var(--main-gray)" />,
+  },
+  {
+    title: 'Calendar',
+    component: <CalendarDays color="var(--main-gray)" />,
+  },
+  {
+    title: 'Settings',
+    component: <Settings color="var(--main-gray)" />,
+  }
 ]
-// TODO:  сделать массим навигации. Переименовать иконки. 
+
 function NavBar() {
   return (
     <Card className="w-fit shadow-xl p-0 fixed bg-white h-full mt-0.5">
       <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-10 list-none">
-        {imageList.map((src, i) => (
-          <NavItem src={src} key={i} />
+        {NAV.map((icon, i) => (
+          <NavItem key={i}>
+            {icon.component}
+          </NavItem>
         ))}
       </NavigationMenu>
     </Card>
