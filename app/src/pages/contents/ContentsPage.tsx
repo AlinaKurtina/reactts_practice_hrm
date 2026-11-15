@@ -1,9 +1,7 @@
-import MyButton from "@/components/common/Buttons";
-import Search from "@/components/common/Search/Search";
-import Selection from "@/components/common/Selection";
 import ContentsList from "./components/ContentsList";
 import Wrapper from "@/components/common/Wrapper";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import FilteredSearch from "@/components/common/FilteredSearch";
 
 function ContentsPage() {
   return (
@@ -16,12 +14,7 @@ function ContentsPage() {
             <TabsTrigger value="quizes" className="rounded-xs border-b-2 cursor-pointer border-transparent data-active:border-b-(--brand-red) pb-4">Quizes</TabsTrigger>
           </TabsList>
         </Tabs>
-        <Search placeholder="Course name" />
-        <Wrapper>
-          <Selection placeholder="Author..." />
-          <MyButton text="Reset" className="bg-white text-(--brand-red) px-6 cursor-pointer rounded-sm hover:bg-red-50" />
-          <MyButton text="Apply" />
-        </Wrapper>
+        <FilteredSearch searchPlaceholder="Course name" selectionPlaceholder="Author: Alina Kurtsina" />
         <ContentsList />
       </Wrapper>
     </>

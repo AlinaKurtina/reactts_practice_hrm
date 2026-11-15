@@ -41,7 +41,7 @@ function NavBar() {
     <Card className="w-fit shadow-xl p-0 fixed bg-white h-full mt-0.5">
       <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-10 list-none">
         {NAV.map((icon, i) => (
-          <NavItem key={i}>
+          <NavItem key={i} title={icon.title}>
             {icon.component}
           </NavItem>
         ))}
