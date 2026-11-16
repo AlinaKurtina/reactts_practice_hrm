@@ -11,12 +11,18 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppContentsRouteImport } from './routes/_app/contents'
 
 const AppStudentsLazyRouteImport = createFileRoute('/_app/students')()
 
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -38,19 +44,20 @@ const AppStudentsLazyRoute = AppStudentsLazyRouteImport.update({
 } as any).lazy(() => import('./routes/_app/students.lazy').then((d) => d.Route))
 
 export interface FileRoutesByFullPath {
-  '/': typeof AppRouteWithChildren
+  '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contents': typeof AppContentsRoute
   '/students': typeof AppStudentsLazyRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof AppRouteWithChildren
+  '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contents': typeof AppContentsRoute
   '/students': typeof AppStudentsLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/_app/contents': typeof AppContentsRoute
@@ -61,16 +68,24 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/auth' | '/contents' | '/students'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/auth' | '/contents' | '/students'
-  id: '__root__' | '/_app' | '/auth' | '/_app/contents' | '/_app/students'
+  id: '__root__' | '/' | '/_app' | '/auth' | '/_app/contents' | '/_app/students'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -115,6 +130,7 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
 }
