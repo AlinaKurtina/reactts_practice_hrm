@@ -1,7 +1,10 @@
-interface EmployeeData {
-  id: string;
+interface User {
+  id?: string;
   fullName: string;
   jobTitle: string;
+}
+
+interface EmployeeData extends User {
   educationalMaterial: string;
   attempts: number;
   grade: number;
@@ -17,4 +20,4 @@ interface ContentsData {
   type: string
 }
 
-export type { EmployeeData, ContentsData };
+export type { User, EmployeeData, ContentsData };

@@ -14,7 +14,7 @@ function CardMetadata({ dataKey, dataValue }: CardDataProps) {
 
 function CardData({ dataKey, dataValue }: CardDataProps) {
   return (
-    <div className="flex flex-col w-full text-sm">
+    <div className="flex flex-col w-full text-xs">
       <span className="font-head font-bold">{dataKey}</span>
       <span className="font-secondary opacity-70">{dataValue}</span>
     </div>
