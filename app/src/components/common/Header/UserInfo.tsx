@@ -6,15 +6,15 @@ import avatar from '@/assets/avatars/mainAvatar.png'
 
 function UserInfo() {
   const uid = useAuthStore((state) => state.uid);
-  const setJobTitle = useAuthStore((state) => state.setUserJobTitle);
-  const setFullName = useAuthStore((state) => state.setUserFullname);
+  // const setJobTitle = useAuthStore((state) => state.setUserJobTitle);
+  // const setFullName = useAuthStore((state) => state.setUserFullname);
   const { data, isLoading, error } = useUserData(uid);
 
   if (isLoading) return <span>Loading...</span>;
   if (error) return <span>Error</span>;
 
-  setFullName(data?.fullName);
-  setJobTitle(data?.fullName);
+  // setFullName(data?.fullName);
+  // setJobTitle(data?.fullName);
 
   return (
     <div className="flex text-sm gap-3 font-secondary">

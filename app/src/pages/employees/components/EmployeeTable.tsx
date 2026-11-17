@@ -9,6 +9,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useEmployeeData } from "@/hooks/useEmployeeData";
+import AvatarNameCell from "./AvatarNameCell";
+
+import avatar from '@/assets/avatars/mainAvatar.png';
+import TimeSpentCell from "./TimeSpentCell";
 
 function EmployeeTable() {
   const { data, isLoading, error } = useEmployeeData();
@@ -19,7 +23,7 @@ function EmployeeTable() {
   return (
     <Wrapper className="flex-col">
       <CounterSpan count={data?.length} counted={"employees"} />
-      <Table className="text-(--main-gray-light)">
+      <Table className="text-(--main-gray-light) text-[13px]">
         <TableHeader>
           <TableRow>
             <TableHead>User</TableHead>
@@ -33,12 +37,13 @@ function EmployeeTable() {
         <TableBody>
           {data?.map((emp) => (
             <TableRow key={emp.id}>
-              <TableCell className="text-foreground">{emp.fullName}</TableCell>
+              <TableCell className="text-foreground">
+                <AvatarNameCell fullName={emp.fullName} src={avatar} />
+              </TableCell>
               <TableCell>{emp.jobTitle}</TableCell>
               <TableCell>{emp.educationalMaterial}</TableCell>
               <TableCell>
-                <span className="text-foreground">43</span> min{" "}
-                <span className="text-foreground">57</span> sec
+                <TimeSpentCell time={emp.timeTaken}/>
               </TableCell>
               <TableCell>{emp.attempts != 0 ? emp.attempts : ""}</TableCell>
               <TableCell>{emp.grade != 0 ? emp.grade : ""}</TableCell>

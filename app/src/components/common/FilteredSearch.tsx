@@ -10,7 +10,7 @@ interface Props {
 
 function FilteredSearch({ searchPlaceholder, selectionPlaceholder }: Props) {
   return (
-    <>
+    <Wrapper className="flex-col gap-3.5">
       <Search placeholder={searchPlaceholder} />
       <Wrapper>
         <Selection placeholder={selectionPlaceholder} />
@@ -20,7 +20,7 @@ function FilteredSearch({ searchPlaceholder, selectionPlaceholder }: Props) {
         />
         <MyButton text="Apply" />
       </Wrapper>
-    </>
+    </Wrapper>
   );
 }
 
