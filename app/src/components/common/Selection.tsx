@@ -12,7 +12,7 @@ function Selection({ placeholder }: SelectionProps) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem>Alina Kurtsina</SelectItem>
+          <SelectItem>Option 1</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

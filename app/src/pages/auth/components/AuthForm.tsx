@@ -8,20 +8,24 @@ import { getRouteApi } from "@tanstack/react-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 
-const routeApi = getRouteApi('/auth');
+import { useAuthStore } from "@/stores/useAuthStore";
+
+const routeApi = getRouteApi("/auth");
 
 function AuthForm() {
   const navigate = routeApi.useNavigate();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const setUserUID = useAuthStore((state) => state.setUserUID);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   async function logIn() {
     try {
       const authenticate = await signInWithEmailAndPassword(auth, email, password);
       const user = authenticate.user;
       console.log(user);
-      await navigate({ to: '/contents' });
-    } catch(err) {
+      setUserUID(user.uid);
+      await navigate({ to: "/contents" });
+    } catch (err) {
       console.error(err);
     }
   }
@@ -35,8 +39,19 @@ function AuthForm() {
           <span className="text-(--main-gray-light) text-2xl">Toolset</span>
         </FieldLegend>
         <FieldGroup className="gap-3 mt-2">
-          <Input id="mail" className="rounded-sm" placeholder="Mail" onChange={(e) => setEmail(e.currentTarget.value)}/>
-          <Input id="password" className="rounded-sm" placeholder="Password" type="password" onChange={(e) => setPassword(e.currentTarget.value)} />
+          <Input
+            id="mail"
+            className="rounded-sm"
+            placeholder="Mail"
+            onChange={(e) => setEmail(e.currentTarget.value)}
+          />
+          <Input
+            id="password"
+            className="rounded-sm"
+            placeholder="Password"
+            type="password"
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
         </FieldGroup>
         <Button className="cursor-pointer hover:bg-(--brand-red)" onClick={logIn}>
           Log In

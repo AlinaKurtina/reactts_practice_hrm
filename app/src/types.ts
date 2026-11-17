@@ -20,4 +20,6 @@ interface ContentsData {
   type: string
 }
 
-export type { User, EmployeeData, ContentsData };
+type possibleCategories = 'courses' | 'lectures' | 'quizzes'
+
+export type { User, EmployeeData, ContentsData, possibleCategories };

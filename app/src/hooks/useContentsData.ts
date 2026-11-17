@@ -1,14 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchContentsData } from "@/api/contents";
+import type { possibleCategories } from "@/types";
 
 const contentsKeys = {
-  all: ["contents"],
+  courses: ['courses'],
+  lectures: ['lectures'],
+  quizzes: ['quizzes']
 } as const;
 
-function useContentsData() {
+function useContentsData(category: possibleCategories) {
   return useQuery({
-    queryKey: contentsKeys.all,
-    queryFn: fetchContentsData,
+    queryKey: contentsKeys[category],
+    queryFn: () => fetchContentsData(category),
+    enabled: !!category
   });
 }
 
