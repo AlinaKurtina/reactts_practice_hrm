@@ -1,14 +1,21 @@
 import CounterSpan from "@/components/common/CounterSpan";
 import ContentsCard from "./ContentsCard/ContentsCard";
 import Wrapper from "@/components/common/Wrapper";
-import { useContentsData } from "@/hooks/useContentsData";
 import React from "react";
-import type { possibleCategories } from "@/types";
+import type { ContentsData, possibleCategories } from "@/types";
 
-function ContentsList({ category }: { category: possibleCategories }) {
-  const { data, isLoading, error } = useContentsData(category);
+interface Props {
+  data: ContentsData[] | undefined;
+  category: possibleCategories;
+  isLoading: boolean;
+  isError: Error | null;
+}
+
+function ContentsList({ data, category, isLoading, isError }: Props) {
+
   if (isLoading) return <span>Loading...</span>;
-  if (error) return <span>Error placeholder</span>;
+  if (isError) return <span>Error placeholder</span>;
+
   return (
     <div className="flex flex-col">
       <CounterSpan count={data?.length} counted={category} />

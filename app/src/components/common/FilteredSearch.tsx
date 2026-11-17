@@ -6,12 +6,13 @@ import Wrapper from "./Wrapper";
 interface Props {
   searchPlaceholder: string;
   selectionPlaceholder: string;
+  onSearch: (e: React.ChangeEvent<HTMLInputElement, Element>) => void;
 }
 
-function FilteredSearch({ searchPlaceholder, selectionPlaceholder }: Props) {
+function FilteredSearch({ searchPlaceholder, selectionPlaceholder, onSearch }: Props) {
   return (
     <Wrapper className="flex-col gap-3.5">
-      <Search placeholder={searchPlaceholder} />
+      <Search placeholder={searchPlaceholder} onSearch={onSearch} />
       <Wrapper>
         <Selection placeholder={selectionPlaceholder} />
         <MyButton

@@ -8,17 +8,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useEmployeeData } from "@/hooks/useEmployeeData";
 import AvatarNameCell from "./AvatarNameCell";
 
-import avatar from '@/assets/avatars/mainAvatar.png';
+import avatar from "@/assets/avatars/mainAvatar.png";
 import TimeSpentCell from "./TimeSpentCell";
+import type { EmployeeData } from "@/types";
 
-function EmployeeTable() {
-  const { data, isLoading, error } = useEmployeeData();
+interface Props {
+  data: EmployeeData[] | undefined;
+  isLoading: boolean;
+  isError: Error | null;
+}
+
+function EmployeeTable({ data, isLoading, isError }: Props) {
 
   if (isLoading) return <span>Loading...</span>;
-  if (error) return <span>Error placeholder</span>;
+  if (isError) return <span>Error placeholder</span>;
 
   return (
     <Wrapper className="flex-col">
@@ -43,7 +48,7 @@ function EmployeeTable() {
               <TableCell>{emp.jobTitle}</TableCell>
               <TableCell>{emp.educationalMaterial}</TableCell>
               <TableCell>
-                <TimeSpentCell time={emp.timeTaken}/>
+                <TimeSpentCell time={emp.timeTaken} />
               </TableCell>
               <TableCell>{emp.attempts != 0 ? emp.attempts : ""}</TableCell>
               <TableCell>{emp.grade != 0 ? emp.grade : ""}</TableCell>
