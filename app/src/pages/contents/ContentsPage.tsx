@@ -7,6 +7,7 @@ import CustomTab from "./components/CustomTab";
 import type { possibleCategories } from "@/types";
 import { capitalize } from "@/lib/utils";
 import { useContentsData } from "@/hooks/useContentsData";
+import CounterSpan from "@/components/common/CounterSpan";
 
 const CATEGORIES = ["courses", "lectures", "quizzes"];
 
@@ -15,7 +16,9 @@ function ContentsPage() {
   const { data, isLoading, error } = useContentsData(currentCategory);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filteredData = data?.filter((cnt) => cnt.title.toLowerCase().includes(searchQuery.trim().toLowerCase()));
+  const filteredData = data?.filter((cnt) =>
+    cnt.title.toLowerCase().includes(searchQuery.trim().toLowerCase()),
+  );
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(e.currentTarget.value);
@@ -40,12 +43,10 @@ function ContentsPage() {
           selectionPlaceholder="Author: Alina Kurtsina"
           onSearch={handleSearch}
         />
-        <ContentsList
-          data={filteredData}
-          category={currentCategory}
-          isLoading={isLoading}
-          isError={error}
-        />
+        <Wrapper className="flex-col">
+          <CounterSpan count={data?.length} counted={currentCategory} isLoading={isLoading}/>
+          <ContentsList data={filteredData} isLoading={isLoading} isError={error} />
+        </Wrapper>
       </Wrapper>
     </>
   );

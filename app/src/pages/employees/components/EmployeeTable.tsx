@@ -13,6 +13,7 @@ import AvatarNameCell from "./AvatarNameCell";
 import avatar from "@/assets/avatars/mainAvatar.png";
 import TimeSpentCell from "./TimeSpentCell";
 import type { EmployeeData } from "@/types";
+import TableBodySkeleton from "./TableBodySkeleton";
 
 interface Props {
   data: EmployeeData[] | undefined;
@@ -21,13 +22,11 @@ interface Props {
 }
 
 function EmployeeTable({ data, isLoading, isError }: Props) {
-
-  if (isLoading) return <span>Loading...</span>;
   if (isError) return <span>Error placeholder</span>;
 
   return (
     <Wrapper className="flex-col">
-      <CounterSpan count={data?.length} counted={"employees"} />
+      <CounterSpan count={data?.length} counted={"employees"} isLoading={isLoading} />
       <Table className="text-(--main-gray-light) text-[13px]">
         <TableHeader>
           <TableRow>
@@ -40,20 +39,24 @@ function EmployeeTable({ data, isLoading, isError }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.map((emp) => (
-            <TableRow key={emp.id}>
-              <TableCell className="text-foreground">
-                <AvatarNameCell fullName={emp.fullName} src={avatar} />
-              </TableCell>
-              <TableCell>{emp.jobTitle}</TableCell>
-              <TableCell>{emp.educationalMaterial}</TableCell>
-              <TableCell>
-                <TimeSpentCell time={emp.timeTaken} />
-              </TableCell>
-              <TableCell>{emp.attempts != 0 ? emp.attempts : ""}</TableCell>
-              <TableCell>{emp.grade != 0 ? emp.grade : ""}</TableCell>
-            </TableRow>
-          ))}
+          {data ? (
+            data.map((emp) => (
+              <TableRow key={emp.id}>
+                <TableCell className="text-foreground">
+                  <AvatarNameCell fullName={emp.fullName} src={avatar} />
+                </TableCell>
+                <TableCell>{emp.jobTitle}</TableCell>
+                <TableCell>{emp.educationalMaterial}</TableCell>
+                <TableCell>
+                  <TimeSpentCell time={emp.timeTaken} />
+                </TableCell>
+                <TableCell>{emp.attempts != 0 ? emp.attempts : ""}</TableCell>
+                <TableCell>{emp.grade != 0 ? emp.grade : ""}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableBodySkeleton />
+          )}
         </TableBody>
       </Table>
     </Wrapper>
