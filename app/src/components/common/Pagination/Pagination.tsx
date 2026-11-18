@@ -1,9 +1,14 @@
-import { Pagination, PaginationContent, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import Card from "../Card";
 
-function Paginations() {
+function MyPagination() {
   return (
-    <Card className="h-10 w-full shadow-[0_0_10px_rgba(0,0,0,0.17)] bg-white absolute top-156 left-0">
+    <Card className="h-10 w-full shadow-[0_0_10px_rgba(0,0,0,0.17)] bg-white absolute bottom-0 left-0">
       <Pagination>
         <PaginationContent>
           <PaginationPrevious className="cursor-pointer pr-1" />
@@ -11,7 +16,7 @@ function Paginations() {
         </PaginationContent>
       </Pagination>
     </Card>
-  )
+  );
 }
 
-export default Paginations;
+export default MyPagination;

@@ -1,17 +1,16 @@
 import type React from "react";
 import Card from "./Card";
-import Paginations from "./Pagination/Pagination";
+import MyPagination from "./Pagination/Pagination";
 
 function Content({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <Card className="ml-28 mt-8 min-h-165 bg-white max-w-333 relative rounded-md">
+      <Card className="relative h-fit bg-white max-w-300 rounded-md justify-center ml-auto mr-auto mt-10 min-h-167">
         {children}
-        <Paginations />
+        <MyPagination />
       </Card>
     </div>
-  )
+  );
 }
 
 export default Content;
-

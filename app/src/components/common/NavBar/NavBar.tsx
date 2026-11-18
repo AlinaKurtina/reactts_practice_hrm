@@ -6,6 +6,7 @@ import NavItem from "./NavItem";
 import type React from "react";
 import NavBarAdditional from "./NavBarAdditional";
 import Wrapper from "../Wrapper";
+import Gradient from "../Gradient";
 
 interface NavLink {
   title: string;
@@ -44,7 +45,8 @@ const NAV: NavLink[] = [
 
 function NavBar() {
   return (
-    <Card className="w-fit shadow-xl p-0 fixed bg-white h-full mt-0.5 flex-col">
+    <Card className="w-fit shadow-xl p-0 bg-white flex-col h-screen mr-auto fixed">
+      <Gradient className="h-2 from-(--main-gray-light)/10"/>
       <Wrapper className="flex-col items-center gap-60">
         <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-2 list-none">
           {NAV.map((icon, i) =>
