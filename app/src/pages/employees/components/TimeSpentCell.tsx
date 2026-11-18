@@ -6,6 +6,7 @@ interface Props {
 
 function TimeSpentCell({ time }: Props) {
   const { minutes, seconds } = timeFormatter(time);
+
   return (
     <>
       <span className="text-foreground">{minutes}</span> min{" "}

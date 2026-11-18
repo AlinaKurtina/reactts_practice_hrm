@@ -3,16 +3,16 @@ import { fetchContentsData } from "@/api/contents";
 import type { possibleCategories } from "@/types";
 
 const contentsKeys = {
-  courses: ['courses'],
-  lectures: ['lectures'],
-  quizzes: ['quizzes']
-} as const;
+  courses: ["courses"] as const,
+  lectures: ["lectures"] as const,
+  quizzes: ["quizzes"] as const,
+};
 
 function useContentsData(category: possibleCategories) {
   return useQuery({
     queryKey: contentsKeys[category],
     queryFn: () => fetchContentsData(category),
-    enabled: !!category
+    enabled: !!category,
   });
 }
 

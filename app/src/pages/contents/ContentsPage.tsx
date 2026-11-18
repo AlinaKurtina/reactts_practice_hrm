@@ -2,14 +2,14 @@ import ContentsList from "./components/ContentsList";
 import Wrapper from "@/components/common/Wrapper";
 import { Tabs, TabsList } from "@/components/ui/tabs";
 import FilteredSearch from "@/components/common/FilteredSearch";
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
 import CustomTab from "./components/CustomTab";
 import type { possibleCategories } from "@/types";
 import { capitalize } from "@/lib/utils";
-import { useContentsData } from "@/hooks/useContentsData";
+import { useContentsData } from "@/hooks/queryHooks/useContentsData";
 import CounterSpan from "@/components/common/CounterSpan";
 
-const CATEGORIES = ["courses", "lectures", "quizzes"];
+const CATEGORIES: possibleCategories[] = ["courses", "lectures", "quizzes"];
 
 function ContentsPage() {
   const [currentCategory, setCurrentCategory] = useState<possibleCategories>("courses");
@@ -30,11 +30,7 @@ function ContentsPage() {
         <Tabs defaultValue="courses" className="py-2 border-b p-0 pt-2.5">
           <TabsList variant="line" className="p-0">
             {CATEGORIES.map((cat, i) => (
-              <CustomTab
-                key={i}
-                value={capitalize(cat)}
-                setFn={() => setCurrentCategory(cat as SetStateAction<possibleCategories>)}
-              />
+              <CustomTab key={i} value={capitalize(cat)} setFn={() => setCurrentCategory(cat)} />
             ))}
           </TabsList>
         </Tabs>
@@ -44,7 +40,7 @@ function ContentsPage() {
           onSearch={handleSearch}
         />
         <Wrapper className="flex-col">
-          <CounterSpan count={data?.length} counted={currentCategory} isLoading={isLoading}/>
+          <CounterSpan count={data?.length} counted={currentCategory} isLoading={isLoading} />
           <ContentsList data={filteredData} isLoading={isLoading} isError={error} />
         </Wrapper>
       </Wrapper>

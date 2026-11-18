@@ -3,10 +3,10 @@ import Wrapper from "@/components/common/Wrapper";
 import EmployeeTable from "./components/EmployeeTable";
 import ExportButton from "./components/ExportButton";
 import { useState } from "react";
-import { useEmployeeData } from "@/hooks/useEmployeeData";
+import { useEmployeeData } from "@/hooks/queryHooks/useEmployeeData";
 
 function EmployeePage() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState("");
   const { data, isLoading, error } = useEmployeeData();
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {

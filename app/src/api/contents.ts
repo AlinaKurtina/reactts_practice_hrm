@@ -5,7 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 async function fetchContentsData(category: string): Promise<ContentsData[] | undefined> {
   try {
     const response = await getDocs(collection(db, category));
-    console.log(response)
+    console.log(response);
     return response.docs.map((cnt) => ({
       id: cnt.id,
       ...cnt.data(),
