@@ -4,6 +4,8 @@ import Card from "../Card";
 import { CalendarDays, ClipboardList, List, Network, Settings, UserRound } from "lucide-react";
 import NavItem from "./NavItem";
 import type React from "react";
+import NavBarAdditional from "./NavBarAdditional";
+import Wrapper from "../Wrapper";
 
 interface NavLink {
   title: string;
@@ -14,48 +16,51 @@ interface NavLink {
 const NAV: NavLink[] = [
   {
     title: "Employees",
-    component: <UserRound color="var(--main-gray)" />,
+    component: <UserRound className="nav-item" color="var(--main-gray-light)" />,
     link: "/employees",
   },
   {
     title: "Contents",
-    component: <Network color="var(--main-gray)" />,
+    component: <Network className="nav-item" color="var(--main-gray-light)" />,
     link: "/contents",
   },
   {
     title: "List",
-    component: <List color="var(--main-gray)" />,
+    component: <List className="nav-item" color="var(--main-gray-light)" />,
   },
   {
     title: "Notebook",
-    component: <ClipboardList color="var(--main-gray)" />,
+    component: <ClipboardList className="nav-item" color="var(--main-gray-light)" />,
   },
   {
     title: "Calendar",
-    component: <CalendarDays color="var(--main-gray)" />,
+    component: <CalendarDays className="nav-item" color="var(--main-gray-light)" />,
   },
   {
     title: "Settings",
-    component: <Settings color="var(--main-gray)" />,
+    component: <Settings className="nav-item" color="var(--main-gray-light)" />,
   },
 ];
 
 function NavBar() {
   return (
-    <Card className="w-fit shadow-xl p-0 fixed bg-white h-full mt-0.5">
-      <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-10 list-none">
-        {NAV.map((icon, i) =>
-          icon.link ? (
-            <Link key={i} to={icon.link}>
-              <NavItem title={icon.title}>{icon.component}</NavItem>
-            </Link>
-          ) : (
-            <NavItem key={i} title={icon.title}>
-              {icon.component}
-            </NavItem>
-          ),
-        )}
-      </NavigationMenu>
+    <Card className="w-fit shadow-xl p-0 fixed bg-white h-full mt-0.5 flex-col">
+      <Wrapper className="flex-col items-center gap-60">
+        <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-2 list-none">
+          {NAV.map((icon, i) =>
+            icon.link ? (
+              <Link key={i} to={icon.link}>
+                <NavItem title={icon.title}>{icon.component}</NavItem>
+              </Link>
+            ) : (
+              <NavItem key={i} title={icon.title}>
+                {icon.component}
+              </NavItem>
+            ),
+          )}
+        </NavigationMenu>
+        <NavBarAdditional />
+      </Wrapper>
     </Card>
   );
 }

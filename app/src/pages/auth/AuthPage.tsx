@@ -3,7 +3,7 @@ import MainFrame from "./components/MainFrame";
 
 function AuthPage() {
   return (
-    <div className="flex">
+    <div className="flex items-center justify-center">
       <MainFrame />
       <AuthForm />
     </div>

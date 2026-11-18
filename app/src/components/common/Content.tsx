@@ -5,7 +5,7 @@ import Paginations from "./Pagination/Pagination";
 function Content({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <Card className="ml-28 mt-8 min-h-165 min-w-333 bg-white w-5 relative rounded-md">
+      <Card className="ml-28 mt-8 min-h-165 bg-white max-w-333 relative rounded-md">
         {children}
         <Paginations />
       </Card>

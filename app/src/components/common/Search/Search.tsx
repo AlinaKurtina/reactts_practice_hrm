@@ -3,7 +3,7 @@ import searchIcon from "@/assets/search.svg";
 
 interface Props {
   placeholder?: string;
-  onSearch: (e: React.ChangeEvent<HTMLInputElement, Element>) => void;
+  onSearch?: (e: React.ChangeEvent<HTMLInputElement, Element>) => void;
 }
 
 function Search({ placeholder, onSearch }: Props) {
