@@ -8,8 +8,9 @@ import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
 
 function EmployeePage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectValue, setSelectValue] = useState("");
-  const [appliedFilter, setAppliedFilter] = useState("");
+  const [selectValue, setSelectValue] = useState<string | null>(null);
+  const [appliedFilter, setAppliedFilter] = useState<string | null>(null);
+
   const { data, isLoading, error } = useFilteredEmployeeData({
     filter: "jobTitle",
     filterValue: appliedFilter,
@@ -31,18 +32,22 @@ function EmployeePage() {
       <Wrapper className="flex-col gap-5 mt-5 w-full">
         <Wrapper className="justify-between">
           <FilteredSearch
-            searchPlaceholder="Surname, First Name"
+            placeholder="Surname, First Name"
             selectionPlaceholder="Position: React Developer"
             onSearch={(e: React.ChangeEvent<HTMLInputElement>) =>
               setSearchQuery(e.currentTarget.value)
             }
             onSelect={(value: string) => setSelectValue(value)}
-            onReset={() => setAppliedFilter("")}
+            onReset={() => {
+              setSelectValue(null);
+              setAppliedFilter(null);
+            }}
             onApply={() => setAppliedFilter(selectValue)}
+            currentSelectValue={selectValue}
           />
           <ExportButton />
         </Wrapper>
-        <EmployeeTable data={filteredData} isLoading={isLoading} isError={error} />
+        <EmployeeTable data={filteredData} isLoading={isLoading} error={error} />
       </Wrapper>
     </>
   );

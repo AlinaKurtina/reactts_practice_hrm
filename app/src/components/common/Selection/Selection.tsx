@@ -9,16 +9,22 @@ import {
 } from "../../ui/select";
 import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
 
-interface SelectionProps {
-  placeholder: string;
+export interface SelectionProps {
+  selectionPlaceholder: string;
   onSelect: (value: string) => void;
+  currentSelectValue: string | null;
 }
 
-function Selection({ placeholder, onSelect }: SelectionProps) {
+function Selection({
+  selectionPlaceholder: placeholder,
+  onSelect,
+  currentSelectValue,
+}: SelectionProps) {
   const { allJobTitles } = useEmployeeFiltersStore();
 
   return (
     <Select
+      value={currentSelectValue}
       onValueChange={
         onSelect as (value: string | null, eventDetails: SelectRootChangeEventDetails) => void
       }
@@ -34,7 +40,7 @@ function Selection({ placeholder, onSelect }: SelectionProps) {
               key={jobTitle}
               value={jobTitle}
             >
-              <span className="truncate block max-w-45">{`Position: ${jobTitle}`}</span>
+              <span className="truncate block max-w-40">{`Position: ${jobTitle}`}</span>
             </SelectItem>
           ))}
         </SelectGroup>

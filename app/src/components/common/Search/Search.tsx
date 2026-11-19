@@ -1,12 +1,12 @@
 import { Input } from "../../ui/input";
 import searchIcon from "@/assets/search.svg";
 
-interface Props {
+export interface SearchProps {
   placeholder?: string;
   onSearch?: (e: React.ChangeEvent<HTMLInputElement, Element>) => void;
 }
 
-function Search({ placeholder, onSearch }: Props) {
+function Search({ placeholder, onSearch }: SearchProps) {
   return (
     <div className="flex items-center">
       <img src={searchIcon} alt="search-icon" className="absolute w-3 ml-2 z-2" />

@@ -18,10 +18,10 @@ import TableBodySkeleton from "./TableBodySkeleton";
 interface Props {
   data: EmployeeData[] | undefined;
   isLoading: boolean;
-  isError: Error | null;
+  error: Error | null;
 }
 
-function EmployeeTable({ data, isLoading, isError }: Props) {
+function EmployeeTable({ data, isLoading, error: isError }: Props) {
   if (isError) return <span>Error placeholder</span>;
 
   return (

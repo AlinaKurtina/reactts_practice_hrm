@@ -1,24 +1,31 @@
-import type { SelectRootChangeEventDetails } from "@base-ui/react/select";
 import MyButton from "./Buttons";
-import Search from "./Search/Search";
-import Selection from "./Selection/Selection";
+import Search, { type SearchProps } from "./Search/Search";
+import Selection, { type SelectionProps } from "./Selection/Selection";
 import Wrapper from "./Wrapper";
 
-interface Props {
-  searchPlaceholder: string;
-  selectionPlaceholder: string;
-  onSearch: (e: React.ChangeEvent<HTMLInputElement, Element>) => void;
-  onSelect: (value: string) => void;
+interface Props extends SelectionProps, SearchProps {
   onReset: () => void;
   onApply: () => void;
 }
 
-function FilteredSearch({ searchPlaceholder, selectionPlaceholder, onSearch, onApply, onReset, onSelect }: Props) {
+function FilteredSearch({
+  placeholder,
+  selectionPlaceholder,
+  onSearch,
+  onApply,
+  onReset,
+  onSelect,
+  currentSelectValue,
+}: Props) {
   return (
     <Wrapper className="flex-col gap-3.5">
-      <Search placeholder={searchPlaceholder} onSearch={onSearch} />
+      <Search placeholder={placeholder} onSearch={onSearch} />
       <Wrapper>
-        <Selection placeholder={selectionPlaceholder} onSelect={onSelect} />
+        <Selection
+          selectionPlaceholder={selectionPlaceholder}
+          onSelect={onSelect}
+          currentSelectValue={currentSelectValue}
+        />
         <MyButton
           text="Reset"
           className="bg-white text-(--brand-red) px-6 cursor-pointer rounded-sm hover:bg-red-50"
