@@ -22,4 +22,9 @@ interface ContentsData {
 
 type possibleCategories = 'courses' | 'lectures' | 'quizzes'
 
-export type { User, EmployeeData, ContentsData, possibleCategories };
+interface EmployeeFilters {
+  filter?: keyof EmployeeData, 
+  filterValue: string | null
+}
+
+export type { User, EmployeeData, ContentsData, possibleCategories, EmployeeFilters };

@@ -35,6 +35,7 @@ function ContentsPage() {
           </TabsList>
         </Tabs>
         <FilteredSearch
+          key={currentCategory}
           searchPlaceholder={`Search for ${currentCategory}...`}
           selectionPlaceholder="Author: Alina Kurtsina"
           onSearch={handleSearch}

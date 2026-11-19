@@ -2,20 +2,29 @@ import FilteredSearch from "@/components/common/FilteredSearch";
 import Wrapper from "@/components/common/Wrapper";
 import EmployeeTable from "./components/EmployeeTable";
 import ExportButton from "./components/ExportButton";
-import { useState } from "react";
-import { useEmployeeData } from "@/hooks/queryHooks/useEmployeeData";
+import { useEffect, useState } from "react";
+import { useFilteredEmployeeData } from "@/hooks/queryHooks/useEmployeeData";
+import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
 
 function EmployeePage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, isLoading, error } = useEmployeeData();
-
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchQuery(e.currentTarget.value);
-  }
+  const [selectValue, setSelectValue] = useState("");
+  const [appliedFilter, setAppliedFilter] = useState("");
+  const { data, isLoading, error } = useFilteredEmployeeData({
+    filter: "jobTitle",
+    filterValue: appliedFilter,
+  });
+  const { setEmployeeJobTitles } = useEmployeeFiltersStore();
 
   const filteredData = data?.filter((emp) =>
     emp.fullName.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  useEffect(() => {
+    if (data) {
+      setEmployeeJobTitles([...new Set(data.map((emp) => emp.jobTitle))]);
+    }
+  }, [data, setEmployeeJobTitles]);
 
   return (
     <>
@@ -24,7 +33,12 @@ function EmployeePage() {
           <FilteredSearch
             searchPlaceholder="Surname, First Name"
             selectionPlaceholder="Position: React Developer"
-            onSearch={handleSearch}
+            onSearch={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchQuery(e.currentTarget.value)
+            }
+            onSelect={(value: string) => setSelectValue(value)}
+            onReset={() => setAppliedFilter("")}
+            onApply={() => setAppliedFilter(selectValue)}
           />
           <ExportButton />
         </Wrapper>

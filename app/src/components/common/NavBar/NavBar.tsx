@@ -46,9 +46,9 @@ const NAV: NavLink[] = [
 function NavBar() {
   return (
     <Card className="w-fit shadow-xl p-0 bg-white flex-col h-screen mr-auto fixed">
-      <Gradient className="h-2 from-(--main-gray-light)/10"/>
-      <Wrapper className="flex-col items-center gap-60">
-        <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-2 list-none">
+      <Wrapper className="flex-col items-center gap-60 relative">
+        <Gradient className="h-2 from-(--main-gray-light)/10 -z-10"/>
+        <NavigationMenu className="flex-col h-100dvh w-fit justify-baseline mt-0.5 list-none z-1">
           {NAV.map((icon, i) =>
             icon.link ? (
               <Link key={i} to={icon.link}>
