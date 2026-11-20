@@ -16,6 +16,7 @@ function FilteredSearch({
   onReset,
   onSelect,
   currentSelectValue,
+  selectionData,
 }: Props) {
   return (
     <Wrapper className="flex-col gap-3.5">
@@ -25,6 +26,7 @@ function FilteredSearch({
           selectionPlaceholder={selectionPlaceholder}
           onSelect={onSelect}
           currentSelectValue={currentSelectValue}
+          selectionData={selectionData}
         />
         <MyButton
           text="Reset"

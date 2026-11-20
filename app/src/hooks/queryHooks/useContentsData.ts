@@ -1,18 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchContentsData } from "@/api/contents";
-import type { possibleCategories } from "@/types";
+import { filterContentsData } from "@/api/contents";
+import type { ContentsFilters, possibleCategories } from "@/types";
 
 const contentsKeys = {
-  courses: ["courses"] as const,
-  lectures: ["lectures"] as const,
-  quizzes: ["quizzes"] as const,
+  all: ["contents"] as const,
+  lists: () => [contentsKeys.all, "list"] as const,
+  byCategory: (category: possibleCategories) => [contentsKeys.lists(), category] as const,
+  list: (category: possibleCategories, filter?: string | null, filterValue?: string | null) =>
+    [
+      ...contentsKeys.byCategory(category),
+      { filter: filter ?? null, filterValue: filterValue ?? null },
+    ] as const,
 };
 
-function useContentsData(category: possibleCategories) {
+function useContentsData({ filter, filterValue, category }: ContentsFilters) {
   return useQuery({
-    queryKey: contentsKeys[category],
-    queryFn: () => fetchContentsData(category),
-    enabled: !!category,
+    queryKey: contentsKeys.list(category, filter, filterValue),
+    queryFn: () => filterContentsData({ filter, filterValue, category }),
   });
 }
 

@@ -7,20 +7,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../ui/select";
-import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
 
 export interface SelectionProps {
   selectionPlaceholder: string;
   onSelect: (value: string) => void;
   currentSelectValue: string | null;
+  selectionData: Array<string>;
 }
 
 function Selection({
   selectionPlaceholder: placeholder,
   onSelect,
   currentSelectValue,
+  selectionData
 }: SelectionProps) {
-  const { allJobTitles } = useEmployeeFiltersStore();
 
   return (
     <Select
@@ -34,13 +34,13 @@ function Selection({
       </SelectTrigger>
       <SelectContent className="rounded-sm">
         <SelectGroup className="rounded-sm p-1">
-          {allJobTitles.map((jobTitle) => (
+          {selectionData.map((selectOption) => (
             <SelectItem
               className="rounded-sm cursor-pointer max-w-inherit px-2 max-w-48"
-              key={jobTitle}
-              value={jobTitle}
+              key={selectOption}
+              value={selectOption}
             >
-              <span className="truncate block max-w-40">{`Position: ${jobTitle}`}</span>
+              <span className="truncate block max-w-40">{`${selectOption}`}</span>
             </SelectItem>
           ))}
         </SelectGroup>

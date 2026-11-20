@@ -15,7 +15,7 @@ function EmployeePage() {
     filter: "jobTitle",
     filterValue: appliedFilter,
   });
-  const { setEmployeeJobTitles } = useEmployeeFiltersStore();
+  const { setEmployeeJobTitles, allJobTitles } = useEmployeeFiltersStore();
 
   const filteredData = data?.filter((emp) =>
     emp.fullName.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -33,7 +33,7 @@ function EmployeePage() {
         <Wrapper className="justify-between">
           <FilteredSearch
             placeholder="Surname, First Name"
-            selectionPlaceholder="Position: React Developer"
+            selectionPlaceholder="Filter by position"
             onSearch={(e: React.ChangeEvent<HTMLInputElement>) =>
               setSearchQuery(e.currentTarget.value)
             }
@@ -44,6 +44,7 @@ function EmployeePage() {
             }}
             onApply={() => setAppliedFilter(selectValue)}
             currentSelectValue={selectValue}
+            selectionData={allJobTitles}
           />
           <ExportButton />
         </Wrapper>

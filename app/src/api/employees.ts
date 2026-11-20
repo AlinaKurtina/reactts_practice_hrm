@@ -9,18 +9,6 @@ import {
   type DocumentData,
 } from "firebase/firestore";
 
-async function fetchEmployeeData(): Promise<EmployeeData[] | undefined> {
-  try {
-    const response = await getDocs(collection(db, "employees"));
-    return response.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as EmployeeData[];
-  } catch (err) {
-    console.error(err);
-  }
-}
-
 async function filterEmployeeData({
   filter,
   filterValue,
@@ -42,4 +30,4 @@ async function filterEmployeeData({
   }
 }
 
-export { fetchEmployeeData, filterEmployeeData };
+export { filterEmployeeData };

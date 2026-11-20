@@ -12,19 +12,33 @@ interface EmployeeData extends User {
 }
 
 interface ContentsData {
-  id?: string,
-  category: string,
-  numberOfStudents: number,
-  passedEducation: number,
-  title: string,
-  type: string
+  id?: string;
+  category: string;
+  numberOfStudents: number;
+  passedEducation: number;
+  title: string;
+  type: string;
+  author: string
 }
 
-type possibleCategories = 'courses' | 'lectures' | 'quizzes'
+type possibleCategories = "courses" | "lectures" | "quizzes";
 
 interface EmployeeFilters {
-  filter?: keyof EmployeeData, 
-  filterValue: string | null
+  filter?: keyof EmployeeData;
+  filterValue: string | null;
 }
 
-export type { User, EmployeeData, ContentsData, possibleCategories, EmployeeFilters };
+interface ContentsFilters {
+  filter?: keyof ContentsData | null;
+  filterValue: string | null;
+  category: possibleCategories;
+}
+
+export type {
+  User,
+  EmployeeData,
+  ContentsData,
+  possibleCategories,
+  EmployeeFilters,
+  ContentsFilters,
+};
