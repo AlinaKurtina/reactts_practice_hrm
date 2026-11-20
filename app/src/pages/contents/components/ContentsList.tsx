@@ -11,7 +11,6 @@ interface Props {
 }
 
 function ContentsList({ data, isLoading, isError }: Props) {
-
   if (isLoading) return <ContentsCardSkeleton />;
   if (isError) return <span>Error placeholder</span>;
 
@@ -26,6 +25,7 @@ function ContentsList({ data, isLoading, isError }: Props) {
               type={cnt.type}
               passedEducation={cnt.passedEducation}
               numberOfStudents={cnt.numberOfStudents}
+              author={cnt.author}
             />
           </React.Fragment>
         ))}

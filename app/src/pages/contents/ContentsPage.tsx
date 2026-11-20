@@ -41,7 +41,14 @@ function ContentsPage() {
         <Tabs defaultValue="courses" className="py-2 border-b p-0 pt-2.5">
           <TabsList variant="line" className="p-0">
             {CATEGORIES.map((cat, i) => (
-              <CustomTab key={i} value={capitalize(cat)} setFn={() => setCurrentCategory(cat)} />
+              <CustomTab
+                key={i}
+                value={capitalize(cat)}
+                setFn={() => {
+                  setCurrentCategory(cat);
+                  setSearchQuery("");
+                }}
+              />
             ))}
           </TabsList>
         </Tabs>
@@ -62,7 +69,11 @@ function ContentsPage() {
           }}
         />
         <Wrapper className="flex-col">
-          <CounterSpan count={filteredData?.length} counted={currentCategory} isLoading={isLoading} />
+          <CounterSpan
+            count={filteredData?.length}
+            counted={currentCategory}
+            isLoading={isLoading}
+          />
           <ContentsList data={filteredData} isLoading={isLoading} isError={error} />
         </Wrapper>
       </Wrapper>
