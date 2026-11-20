@@ -1,15 +1,18 @@
+// oxlint-disable react/refs
 import FilteredSearch from "@/components/common/FilteredSearch";
 import Wrapper from "@/components/common/Wrapper";
 import EmployeeTable from "./components/EmployeeTable";
 import ExportButton from "./components/ExportButton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFilteredEmployeeData } from "@/hooks/queryHooks/useEmployeeData";
 import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 function EmployeePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [appliedFilter, setAppliedFilter] = useState<string | null>(null);
+  const tableRef = useRef(null);
 
   const { data, isLoading, error } = useFilteredEmployeeData({
     filter: "jobTitle",
@@ -22,10 +25,10 @@ function EmployeePage() {
   );
 
   useEffect(() => {
-    if (data) {
+    if (data && !appliedFilter) {
       setEmployeeJobTitles([...new Set(data.map((emp) => emp.jobTitle))]);
     }
-  }, [data, setEmployeeJobTitles]);
+  }, [data, setEmployeeJobTitles, appliedFilter]);
 
   return (
     <>
@@ -46,9 +49,20 @@ function EmployeePage() {
             currentSelectValue={selectValue}
             selectionData={allJobTitles}
           />
-          <ExportButton />
+          <DownloadTableExcel
+            filename="employee_table"
+            sheet="employees"
+            currentTableRef={tableRef.current}
+          >
+            <ExportButton />
+          </DownloadTableExcel>
         </Wrapper>
-        <EmployeeTable data={filteredData} isLoading={isLoading} error={error} />
+        <EmployeeTable
+          data={filteredData}
+          isLoading={isLoading}
+          error={error}
+          tableRef={tableRef}
+        />
       </Wrapper>
     </>
   );

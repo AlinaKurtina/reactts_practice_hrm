@@ -19,15 +19,16 @@ interface Props {
   data: EmployeeData[] | undefined;
   isLoading: boolean;
   error: Error | null;
+  tableRef: React.Ref<HTMLTableElement>;
 }
 
-function EmployeeTable({ data, isLoading, error: isError }: Props) {
+function EmployeeTable({ data, isLoading, error: isError, tableRef }: Props) {
   if (isError) return <span>Error placeholder</span>;
 
   return (
     <Wrapper className="flex-col">
       <CounterSpan count={data?.length} counted={"employees"} isLoading={isLoading} />
-      <Table className="text-(--main-gray-light) text-[13px]">
+      <Table className="text-(--main-gray-light) text-[13px]" ref={tableRef}>
         <TableHeader>
           <TableRow>
             <TableHead>User</TableHead>
