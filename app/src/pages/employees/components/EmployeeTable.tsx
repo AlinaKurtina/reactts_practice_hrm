@@ -41,7 +41,7 @@ function EmployeeTable({ data, isLoading, error: isError }: Props) {
         <TableBody>
           {data ? (
             data.map((emp) => (
-              <TableRow key={emp.id}>
+              <TableRow key={emp.id} className="animate-row-slide">
                 <TableCell className="text-foreground">
                   <AvatarNameCell fullName={emp.fullName} src={avatar} />
                 </TableCell>

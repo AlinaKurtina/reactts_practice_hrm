@@ -1,6 +1,6 @@
 import MyButton from "./Buttons";
 import Search, { type SearchProps } from "./Search/Search";
-import Selection, { type SelectionProps } from "./Selection/Selection";
+import Selection, { type SelectionProps } from "@/components/common/Selection";
 import Wrapper from "./Wrapper";
 
 interface Props extends SelectionProps, SearchProps {

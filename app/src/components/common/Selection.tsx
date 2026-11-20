@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select";
+} from "../ui/select";
 
 export interface SelectionProps {
   selectionPlaceholder: string;
@@ -19,9 +19,8 @@ function Selection({
   selectionPlaceholder: placeholder,
   onSelect,
   currentSelectValue,
-  selectionData
+  selectionData,
 }: SelectionProps) {
-
   return (
     <Select
       value={currentSelectValue}
