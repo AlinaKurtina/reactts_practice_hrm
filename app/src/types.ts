@@ -34,6 +34,13 @@ interface ContentsFilters {
   category: possibleCategories;
 }
 
+interface MessageData {
+  senderId?: string;
+  receiverId?: string;
+  messageText: string;
+  timeSent: string; 
+}
+
 export type {
   User,
   EmployeeData,
@@ -41,4 +48,5 @@ export type {
   possibleCategories,
   EmployeeFilters,
   ContentsFilters,
+  MessageData
 };

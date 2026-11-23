@@ -1,19 +1,10 @@
 import CounterSpan from "@/components/common/CounterSpan";
 import Wrapper from "@/components/common/Wrapper";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import AvatarNameCell from "./AvatarNameCell";
-
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import avatar from "@/assets/avatars/mainAvatar.png";
-import TimeSpentCell from "./TimeSpentCell";
 import type { EmployeeData } from "@/types";
 import TableBodySkeleton from "./TableBodySkeleton";
+import EmployeeTableRow from "./TableRow/EmployeeTableRow";
 
 interface Props {
   data: EmployeeData[] | undefined;
@@ -42,18 +33,17 @@ function EmployeeTable({ data, isLoading, error: isError, tableRef }: Props) {
         <TableBody>
           {data ? (
             data.map((emp) => (
-              <TableRow key={emp.id} className="animate-row-slide">
-                <TableCell className="text-foreground">
-                  <AvatarNameCell fullName={emp.fullName} src={avatar} />
-                </TableCell>
-                <TableCell>{emp.jobTitle}</TableCell>
-                <TableCell>{emp.educationalMaterial}</TableCell>
-                <TableCell>
-                  <TimeSpentCell time={emp.timeTaken} />
-                </TableCell>
-                <TableCell>{emp.attempts != 0 ? emp.attempts : ""}</TableCell>
-                <TableCell>{emp.grade != 0 ? emp.grade : ""}</TableCell>
-              </TableRow>
+              <EmployeeTableRow
+                key={emp.id}
+                id={emp.id}
+                fullName={emp.fullName}
+                jobTitle={emp.jobTitle}
+                educationalMaterial={emp.educationalMaterial}
+                grade={emp.grade}
+                attempts={emp.attempts}
+                timeTaken={emp.timeTaken}
+                avatar={avatar}
+              />
             ))
           ) : (
             <TableBodySkeleton />
