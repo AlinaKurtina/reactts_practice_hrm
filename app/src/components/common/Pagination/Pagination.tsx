@@ -11,7 +11,7 @@ import Selection from "../Selection";
 
 function MyPagination() {
   return (
-    <Card className="h-10 w-full shadow-[0_0_10px_rgba(0,0,0,0.17)] bg-white absolute bottom-0 left-0">
+    <Card className="h-10 w-full shadow-[0_0_10px_rgba(0,0,0,0.17)] bg-white absolute -bottom-8 left-0">
       <Pagination className="justify-start">
         <PaginationContent className="gap-3">
           <PaginationPrevious className="cursor-pointer pr-1 hover:bg-red-50 hover:text-(--brand-red)" />

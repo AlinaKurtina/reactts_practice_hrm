@@ -14,13 +14,14 @@ interface Props {
 }
 
 function EmployeeTable({ data, isLoading, error: isError, tableRef }: Props) {
+
   if (isError) return <span>Error placeholder</span>;
 
   return (
-    <Wrapper className="flex-col">
+    <Wrapper className="flex-col w-full max-h-[65dvh] **:data-[slot=table-container]:overflow-auto [&_[data-slot=table-container]::-webkit-scrollbar]:w-1.5 [&_[data-slot=table-container]::-webkit-scrollbar]:h-1.5 [&_[data-slot=table-container]::-webkit-scrollbar-thumb]:rounded-full [&_[data-slot=table-container]::-webkit-scrollbar-thumb]:bg-black/20">
       <CounterSpan count={data?.length} counted={"employees"} isLoading={isLoading} />
       <Table className="text-(--main-gray-light) text-[13px]" ref={tableRef}>
-        <TableHeader className="">
+        <TableHeader className="sticky top-0 bg-muted z-2">
           <TableRow>
             <TableHead>User</TableHead>
             <TableHead>Job title</TableHead>

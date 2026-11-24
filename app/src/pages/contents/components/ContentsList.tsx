@@ -16,7 +16,7 @@ function ContentsList({ data, isLoading, isError }: Props) {
 
   return (
     <div className="flex flex-col animate-fade-in">
-      <Wrapper className="flex-col overflow-y-scroll max-h-100 scrollbar-thin gap-3.5 max-w-full">
+      <Wrapper className="flex-col overflow-y-scroll max-h-[52.5dvh] scrollbar-thin gap-3.5 max-w-full">
         {data?.map((cnt) => (
           <React.Fragment key={cnt.id}>
             <ContentsCard
