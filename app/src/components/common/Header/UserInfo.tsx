@@ -38,7 +38,7 @@ function UserInfo() {
   if (isLoading) return <UserInfoSkeleton />;
   if (error) return <span>Error</span>;
   if (data) {
-    setNewItem("userData", data);
+    setNewItem("userData", { id: uid, ...data });
   }
 
   async function handleLogOut() {
