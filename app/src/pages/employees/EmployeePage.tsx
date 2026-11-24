@@ -4,7 +4,7 @@ import Wrapper from "@/components/common/Wrapper";
 import EmployeeTable from "./components/EmployeeTable";
 import ExportButton from "./components/ExportButton";
 import { useEffect, useRef, useState } from "react";
-import { useFilteredEmployeeData } from "@/hooks/queryHooks/useEmployeeData";
+import { useFilteredEmployeeData } from "@/hooks/queries/useEmployeeData";
 import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 

@@ -3,18 +3,24 @@ import { Bubble, BubbleContent } from "@/components/ui/bubble";
 import { Message, MessageAvatar, MessageContent } from "@/components/ui/message";
 
 import avatar from "@/assets/avatars/mainAvatar.png";
+import type { MessageData, User } from "@/types";
+import { useLocalStorage } from "@/hooks/helpers/useLocalStorage";
 
-function ChatMessage() {
+// TODO: PUT KEY IN A SEPARATE ENUM-Y!!!! TOO!!!
+function ChatMessage({ messageText, sender }: MessageData) {
+  const { getNewItem } = useLocalStorage();
+  const currentUser = getNewItem<User>("userData")?.fullName;
+
   return (
-    <Message>
-      <MessageAvatar>
+    <Message align={"end"}>
+      {/* <MessageAvatar>
         <Avatar>
-          <AvatarImage src={avatar} alt="@shadcn" />
+          <AvatarImage src={avatar} alt="@me" />
         </Avatar>
-      </MessageAvatar>
+      </MessageAvatar> */}
       <MessageContent>
         <Bubble>
-          <BubbleContent>How can I help you today?</BubbleContent>
+          <BubbleContent className="bg-(--brand-red)!">{messageText}</BubbleContent>
         </Bubble>
       </MessageContent>
     </Message>

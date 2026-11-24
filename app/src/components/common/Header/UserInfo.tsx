@@ -1,5 +1,5 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { useUserData } from "@/hooks/queryHooks/useUserInfo";
+import { useUserData } from "@/hooks/queries/useUserInfo";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
@@ -7,7 +7,7 @@ import { auth } from "@/lib/firebase";
 import avatar from "@/assets/avatars/mainAvatar.png";
 import Wrapper from "../Wrapper";
 import { ChevronDown, ChevronUp, SquareArrowRightExit } from "lucide-react";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useLocalStorage } from "@/hooks/helpers/useLocalStorage";
 import type { User } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";

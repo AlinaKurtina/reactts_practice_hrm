@@ -18,7 +18,7 @@ interface ContentsData {
   passedEducation: number;
   title: string;
   type: string;
-  author: string
+  author: string;
 }
 
 type possibleCategories = "courses" | "lectures" | "quizzes";
@@ -35,10 +35,10 @@ interface ContentsFilters {
 }
 
 interface MessageData {
-  senderId?: string;
-  receiverId?: string;
+  id?: string;
+  sender?: string;
+  receiver?: string;
   messageText: string;
-  timeSent: string; 
 }
 
 export type {
@@ -48,5 +48,5 @@ export type {
   possibleCategories,
   EmployeeFilters,
   ContentsFilters,
-  MessageData
+  MessageData,
 };

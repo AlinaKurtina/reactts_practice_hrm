@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import CustomTab from "./components/CustomTab";
 import type { possibleCategories } from "@/types";
 import { capitalize } from "@/lib/utils";
-import { useContentsData } from "@/hooks/queryHooks/useContentsData";
+import { useContentsData } from "@/hooks/queries/useContentsData";
 import CounterSpan from "@/components/common/CounterSpan";
 import { useContentsFiltersStore } from "@/stores/useContentsFiltersStore";
 

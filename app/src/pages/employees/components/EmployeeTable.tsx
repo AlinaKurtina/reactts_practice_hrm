@@ -20,7 +20,7 @@ function EmployeeTable({ data, isLoading, error: isError, tableRef }: Props) {
     <Wrapper className="flex-col">
       <CounterSpan count={data?.length} counted={"employees"} isLoading={isLoading} />
       <Table className="text-(--main-gray-light) text-[13px]" ref={tableRef}>
-        <TableHeader>
+        <TableHeader className="">
           <TableRow>
             <TableHead>User</TableHead>
             <TableHead>Job title</TableHead>

@@ -7,9 +7,10 @@ interface Props {
 }
 
 function ChatWithButton({ empName }: Props) {
-  const { setIsOpen } = useChatStore();
+  const { setIsOpen, setCurrentRecipient } = useChatStore();
 
   function handleClick() {
+    setCurrentRecipient(empName);
     setIsOpen(true);
   }
 
@@ -19,7 +20,7 @@ function ChatWithButton({ empName }: Props) {
         flex items-center justify-end gap-2
         bg-linear-to-l from-white from-70% to-transparent
         group-even:from-gray-50
-        shadow-[inset_-50px_0_30px_-50px_rgba(15,23,42,0.09)]"
+        shadow-[inset_-50px_0_30px_-50px_rgba(15,23,42,0.05)]"
       onClick={handleClick}
     >
       <MessageCircle color="#c63031" />
