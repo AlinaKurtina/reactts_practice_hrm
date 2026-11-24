@@ -8,12 +8,13 @@ import {
   where,
   type DocumentData,
 } from "firebase/firestore";
+import { COLLECTION_KEYS } from "@/constants/keys";
 
 async function filterEmployeeData({
   filter,
   filterValue,
 }: EmployeeFilters): Promise<EmployeeData[] | undefined> {
-  const collectionRef = collection(db, "employees");
+  const collectionRef = collection(db, COLLECTION_KEYS.EMPLOYEES);
   try {
     let response: QuerySnapshot<DocumentData, DocumentData>;
     if (filter && filterValue) {

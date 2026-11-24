@@ -15,6 +15,7 @@ import Dropdown from "./Dropdown";
 import { useNavigate } from "@tanstack/react-router";
 import { useOutsideClick } from "@/hooks/helpers/useOutsideClick";
 import { Button } from "@/components/ui/button";
+import { STORAGE_KEYS } from "@/constants/keys";
 
 function UserInfoSkeleton() {
   return (
@@ -33,7 +34,7 @@ function UserInfo() {
   const navigate = useNavigate();
   const uid = useAuthStore((state) => state.uid);
   const { setNewItem, getNewItem, removeSomeItem } = useLocalStorage();
-  const savedData: User | null = getNewItem("userData");
+  const savedData: User | null = getNewItem(STORAGE_KEYS.USER_DATA);
   const { data, isLoading, error } = useUserData(uid);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => {
@@ -45,13 +46,13 @@ function UserInfo() {
   if (error) return <span>Error</span>;
 
   if (data) {
-    setNewItem("userData", { id: uid, ...data });
+    setNewItem(STORAGE_KEYS.USER_DATA, { id: uid, ...data });
   }
 
   async function handleLogOut() {
     try {
       await signOut(auth);
-      removeSomeItem("userData");
+      removeSomeItem(STORAGE_KEYS.USER_DATA);
       await navigate({ to: "/auth" });
     } catch (err) {
       console.log(err);

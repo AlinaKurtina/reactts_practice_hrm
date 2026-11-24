@@ -17,8 +17,6 @@ import { useChatStore } from "@/stores/useChatStore";
 import type { User } from "@/types";
 import { createSocket } from "@/lib/websocket";
 
-// TODO: SEPARATE THE DIV INTO A DIFFERENT COMPONENT
-
 function ChatOpen() {
   const [draft, setDraft] = useState("");
   const { fullName } = useAuthStore();
@@ -34,7 +32,6 @@ function ChatOpen() {
     ws.onmessage = (e: MessageEvent<string>) => {
       if (e.data.startsWith("Request served by")) return;
       setMessages((prev) => [...prev, e.data]);
-      console.log(e.data, "gotta appear");
     };
 
     return () => {
@@ -61,7 +58,6 @@ function ChatOpen() {
 
     if (wsRef.current?.readyState === WebSocket.OPEN && messageText) {
       wsRef.current.send(message.messageText);
-      console.log("sent");
     }
 
     console.log(message);
