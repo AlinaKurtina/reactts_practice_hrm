@@ -30,13 +30,13 @@ A beta-version of an HRM application that allows users to explore (search for an
 * **Node.js** (v20 or higher) and **npm**
 * A **Firebase** project with:
   * **Email/Password Authentication** enabled
-  * **Cloud Firestore** database with `users`, `employees`, `courses`, `lectures`, and `quizzes` collections[cite: 1, 2, 3, 4]
+  * **Cloud Firestore** database with `users`, `employees`, `courses`, `lectures`, and `quizzes` collections
 
 ### Installation & Setup
 
 1. **Clone the repository and install dependencies:**
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/AlinaKurtina/reactts_practice_hrm/tree/main/app
    cd <project-folder>
    npm install
 
