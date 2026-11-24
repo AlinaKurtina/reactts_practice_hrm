@@ -13,6 +13,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "@tanstack/react-router";
+import { useOutsideClick } from "@/hooks/helpers/useOutsideClick";
+import { Button } from "@/components/ui/button";
 
 function UserInfoSkeleton() {
   return (
@@ -34,9 +36,14 @@ function UserInfo() {
   const savedData: User | null = getNewItem("userData");
   const { data, isLoading, error } = useUserData(uid);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useOutsideClick<HTMLDivElement>(() => {
+    setDropdownOpen(false);
+  });
 
   if (isLoading) return <UserInfoSkeleton />;
+
   if (error) return <span>Error</span>;
+
   if (data) {
     setNewItem("userData", { id: uid, ...data });
   }
@@ -72,14 +79,18 @@ function UserInfo() {
         />
       )}
       {isDropdownOpen && (
-        <Dropdown className="shadow-[0_10px_15px_-4px_rgba(0,0,0,0.12)] border-t justify-center">
-          <Wrapper
-            className="flex items-center gap-2 cursor-pointer hover:bg-(--main-gray-lighter) hover:font-semibold px-5 py-2"
+        <Dropdown
+          className="shadow-[0_10px_15px_-4px_rgba(0,0,0,0.12)] border-t justify-center p-3"
+          ref={dropdownRef}
+        >
+          <Button
+            className="flex items-center gap-2 cursor-pointer hover:font-semibold px-5 py-2"
             onClick={handleLogOut}
+            size="xs"
           >
             <span className="font-head">Log Out</span>
             <SquareArrowRightExit color="#c63031" className="size-4" />
-          </Wrapper>
+          </Button>
         </Dropdown>
       )}
     </Wrapper>
