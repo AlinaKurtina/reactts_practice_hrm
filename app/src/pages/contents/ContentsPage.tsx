@@ -2,13 +2,14 @@ import ContentsList from "./components/ContentsList";
 import Wrapper from "@/components/common/Wrapper";
 import { Tabs, TabsList } from "@/components/ui/tabs";
 import FilteredSearch from "@/components/common/FilteredSearch";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import CustomTab from "./components/CustomTab";
 import type { possibleCategories } from "@/types";
-import { capitalize, debounce } from "@/lib/utils";
+import { capitalize } from "@/lib/utils";
 import { useContentsData } from "@/hooks/queries/useContentsData";
 import CounterSpan from "@/components/common/CounterSpan";
 import { useContentsFiltersStore } from "@/stores/useContentsFiltersStore";
+import { useDelaySearch } from "@/hooks/helpers/useDelaySearch";
 
 const CATEGORIES: possibleCategories[] = ["courses", "lectures", "quizzes"];
 
@@ -17,6 +18,7 @@ function ContentsPage() {
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [appliedFilter, setAppliedFilter] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const { handleSearch } = useDelaySearch({ setSearchQuery });
   const { setContentsAuthors, allAuthors } = useContentsFiltersStore();
 
   const { data, isLoading, error } = useContentsData({
@@ -28,22 +30,6 @@ function ContentsPage() {
   const filteredData = data?.filter((cnt) =>
     cnt.title.toLowerCase().includes(searchQuery.trim().toLowerCase()),
   );
-
-  const setDebouncedSearchQuery = useMemo(
-    () =>
-      debounce((value: string) => {
-        setSearchQuery(value);
-      }, 300),
-    [],
-  );
-
-  useEffect(() => {
-    return () => setDebouncedSearchQuery.cancel();
-  }, [setDebouncedSearchQuery]);
-
-  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    setDebouncedSearchQuery(e.target.value);
-  }
 
   useEffect(() => {
     if (data && !appliedFilter) {
