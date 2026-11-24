@@ -35,7 +35,7 @@ function EmployeePage() {
   return (
     <>
       <Wrapper className="flex-col gap-5 mt-5 w-full">
-        <Wrapper className="justify-between sm:flex-col max-sm:gap-2">
+        <Wrapper className="justify-between max-sm:flex-col max-sm:gap-2">
           <FilteredSearch
             placeholder="Surname, First Name"
             selectionPlaceholder="Filter by position"
