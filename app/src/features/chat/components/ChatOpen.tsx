@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "@/hooks/helpers/useLocalStorage";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useChatStore } from "@/stores/useChatStore";
-import type { MessageData, User } from "@/types";
+import type { User } from "@/types";
 import { createSocket } from "@/lib/websocket";
 
 // TODO: SEPARATE THE DIV INTO A DIFFERENT COMPONENT
