@@ -3,10 +3,11 @@ import FilteredSearch from "@/components/common/FilteredSearch";
 import Wrapper from "@/components/common/Wrapper";
 import EmployeeTable from "./components/EmployeeTable";
 import ExportButton from "./components/ExportButton";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFilteredEmployeeData } from "@/hooks/queries/useEmployeeData";
 import { useEmployeeFiltersStore } from "@/stores/useEmployeeFIltersStore";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import { debounce } from "@/lib/utils";
 
 function EmployeePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,6 +25,22 @@ function EmployeePage() {
     emp.fullName.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
+  const setDebouncedSearchQuery = useMemo(
+    () =>
+      debounce((value: string) => {
+        setSearchQuery(value);
+      }, 300),
+    [],
+  );
+
+  useEffect(() => {
+    return () => setDebouncedSearchQuery.cancel();
+  }, [setDebouncedSearchQuery]);
+
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    setDebouncedSearchQuery(e.currentTarget.value);
+  }
+
   useEffect(() => {
     if (data && !appliedFilter) {
       setEmployeeJobTitles([...new Set(data.map((emp) => emp.jobTitle))]);
@@ -37,9 +54,7 @@ function EmployeePage() {
           <FilteredSearch
             placeholder="Surname, First Name"
             selectionPlaceholder="Filter by position"
-            onSearch={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setSearchQuery(e.currentTarget.value)
-            }
+            onSearch={handleSearch}
             onSelect={(value: string) => setSelectValue(value)}
             onReset={() => {
               setSelectValue(null);

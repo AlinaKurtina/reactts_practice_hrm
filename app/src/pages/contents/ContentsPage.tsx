@@ -2,10 +2,10 @@ import ContentsList from "./components/ContentsList";
 import Wrapper from "@/components/common/Wrapper";
 import { Tabs, TabsList } from "@/components/ui/tabs";
 import FilteredSearch from "@/components/common/FilteredSearch";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CustomTab from "./components/CustomTab";
 import type { possibleCategories } from "@/types";
-import { capitalize } from "@/lib/utils";
+import { capitalize, debounce } from "@/lib/utils";
 import { useContentsData } from "@/hooks/queries/useContentsData";
 import CounterSpan from "@/components/common/CounterSpan";
 import { useContentsFiltersStore } from "@/stores/useContentsFiltersStore";
@@ -28,6 +28,22 @@ function ContentsPage() {
   const filteredData = data?.filter((cnt) =>
     cnt.title.toLowerCase().includes(searchQuery.trim().toLowerCase()),
   );
+
+  const setDebouncedSearchQuery = useMemo(
+    () =>
+      debounce((value: string) => {
+        setSearchQuery(value);
+      }, 300),
+    [],
+  );
+
+  useEffect(() => {
+    return () => setDebouncedSearchQuery.cancel();
+  }, [setDebouncedSearchQuery]);
+
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    setDebouncedSearchQuery(e.target.value);
+  }
 
   useEffect(() => {
     if (data && !appliedFilter) {
@@ -55,7 +71,7 @@ function ContentsPage() {
         key={currentCategory}
         placeholder={`Search for ${currentCategory}...`}
         selectionPlaceholder="Filter by author"
-        onSearch={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.currentTarget.value)}
+        onSearch={handleSearch}
         selectionData={allAuthors}
         onSelect={(value: string) => setSelectValue(value)}
         currentSelectValue={selectValue}
