@@ -1,15 +1,15 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+// import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Bubble, BubbleContent } from "@/components/ui/bubble";
-import { Message, MessageAvatar, MessageContent } from "@/components/ui/message";
+import { Message,  MessageContent } from "@/components/ui/message";
 
-import avatar from "@/assets/avatars/mainAvatar.png";
-import type { MessageData, User } from "@/types";
-import { useLocalStorage } from "@/hooks/helpers/useLocalStorage";
+// import avatar from "@/assets/avatars/mainAvatar.png";
+import type { MessageData} from "@/types";
+// import { useLocalStorage } from "@/hooks/helpers/useLocalStorage";
 
 // TODO: PUT KEY IN A SEPARATE ENUM-Y!!!! TOO!!!
-function ChatMessage({ messageText, sender }: MessageData) {
-  const { getNewItem } = useLocalStorage();
-  const currentUser = getNewItem<User>("userData")?.fullName;
+function ChatMessage({ messageText }: MessageData) {
+  // const { getNewItem } = useLocalStorage();
+  // const currentUser = getNewItem<User>("userData")?.fullName;
 
   return (
     <Message align={"end"}>
