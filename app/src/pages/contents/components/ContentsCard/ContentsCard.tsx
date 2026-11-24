@@ -9,7 +9,7 @@ import avatar from "@/assets/avatars/mainAvatar.png";
 
 function ContentsCard({ title, category, numberOfStudents, passedEducation, type }: ContentsData) {
   return (
-    <Card className="h-fit gap-15 items-center p-7 rounded-sm border min-w-full">
+    <Card className="h-fit gap-15 items-center p-7 rounded-sm border min-w-full max-sm:w-180">
       <div className="rounded-full shrink-0 bg-red-100 p-3">
         <Eye size={25} className="text-(--brand-red)" />
       </div>

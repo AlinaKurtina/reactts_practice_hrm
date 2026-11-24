@@ -11,7 +11,7 @@ function MainFrame() {
       <div className="flex flex-col h-dvh w-full relative">
         <Gradient className="from-(--grad-red)" />
         <img src={dots1} alt="decor" className="z-2 w-50 ml-auto mt-3.5" />
-        <ul className="flex items-center justify-center gap-5 z-2 mt-auto mb-8">
+        <ul className="flex items-center justify-center gap-5 z-2 mt-auto mb-8 max-sm:hidden">
           <li>
             <MainIcon>
               <Brain size={32} color="#ffffff" />
@@ -33,7 +33,7 @@ function MainFrame() {
             </MainIcon>
           </li>
         </ul>
-        <div className="flex flex-col items-center z-2 text-(--main-white) gap-5">
+        <div className="flex flex-col items-center z-2 text-(--main-white) gap-5 max-sm:mt-auto">
           <h4 className="font-head font-bold text-2xl">Innowise LMS</h4>
           <ul className="flex flex-col gap-3 font-secondary items-center text-m max-w-55 text-center">
             <li>Smart Learning, Smart Development</li>●<li>Unlock Knowledge, Embrace Success</li>●

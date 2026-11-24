@@ -66,7 +66,7 @@ function UserInfo() {
       </Avatar>
       <Wrapper className="flex flex-col">
         <span className="font-bold">{data ? data.fullName : savedData?.fullName}</span>
-        <span>{data ? data.jobTitle : savedData?.jobTitle}</span>
+        <span className="max-sm:hidden">{data ? data.jobTitle : savedData?.jobTitle}</span>
       </Wrapper>
       {isDropdownOpen ? (
         <ChevronUp
